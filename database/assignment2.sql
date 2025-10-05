@@ -19,11 +19,11 @@ VALUES (
 -- Statement 2:
 UPDATE public.account
 SET account_type = 'Admin'
-WHERE account_id = 1;
+WHERE account_email = 'tony@starkent.com';
 
 -- Statement 3:
 DELETE FROM public.account
-WHERE account_id = 1;
+WHERE account_email = 'tony@starkent.com';
 
 -- Statement 4:
 UPDATE public.inventory
