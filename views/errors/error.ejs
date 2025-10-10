@@ -1,9 +1,7 @@
-<main>
-  <!-- content heading -->
-  <% if (title) { %>
-  <h1><%= title %></h1>
-  <% } else { res.redirect('/') } %>
+<!-- content heading -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
 
-  <!-- message -->
-  <%- message %>
-</main>
+<!-- message -->
+<%- message %>
