@@ -32,7 +32,7 @@ Util.buildClassificationGrid = async function (data) {
   if (data.length > 0) {
     grid = '<ul id="inv-display">';
     data.forEach((vehicle) => {
-      grid += "<li>";
+      grid += '<li class="item">';
       grid +=
         '<a href="../../inv/detail/' +
         vehicle.inv_id +
@@ -48,7 +48,7 @@ Util.buildClassificationGrid = async function (data) {
         vehicle.inv_model +
         ' on CSE Motors" /></a>';
       grid += '<div class="namePrice">';
-      grid += "<hr />";
+      grid += '<hr class="divider"/>';
       grid += "<h2>";
       grid +=
         '<a href="../../inv/detail/' +
@@ -62,9 +62,9 @@ Util.buildClassificationGrid = async function (data) {
         " " +
         vehicle.inv_model +
         "</a>";
-      grid += "</h2>";
+      grid += '</h2">';
       grid +=
-        "<span>$" +
+        '<span class="sale-price">$' +
         new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
         "</span>";
       grid += "</div>";
