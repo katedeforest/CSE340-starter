@@ -179,14 +179,14 @@ footer {
   flex-wrap: wrap;
 }
 
-#inv-display .item {
+#inv-display .card {
   list-style-type: none;
   margin: 0 auto;
   width: 300px;
   max-width: 300px;
 }
 
-.item > a {
+.card > a {
   display: grid;
   background-color: #adf8ff;
   width: 100%;
@@ -196,7 +196,7 @@ footer {
   overflow: hidden;
 }
 
-.item > a img {
+.card > a img {
   width: 100%;
   align-self: center;
 }

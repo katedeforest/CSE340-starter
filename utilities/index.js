@@ -32,7 +32,7 @@ Util.buildClassificationGrid = async function (data) {
   if (data.length > 0) {
     grid = '<ul id="inv-display">';
     data.forEach((vehicle) => {
-      grid += '<li class="item">';
+      grid += '<li class="card">';
       grid +=
         '<a href="../../inv/detail/' +
         vehicle.inv_id +
@@ -71,6 +71,45 @@ Util.buildClassificationGrid = async function (data) {
       grid += "</li>";
     });
     grid += "</ul>";
+  } else {
+    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
+  }
+  return grid;
+};
+
+/* **************************************
+ * Build the item view HTML
+ * ************************************ */
+Util.buildInventoryItemGrid = async function (data) {
+  let grid = "";
+  if (data) {
+    grid =
+      '<img src="' +
+      data.inv_image +
+      '" alt="Image of ' +
+      data.inv_make +
+      " " +
+      data.inv_model +
+      '" class="item__img"></img>';
+    grid +=
+      '<h2 class="item__name">' +
+      data.inv_make +
+      " " +
+      data.inv_model +
+      "</h2>";
+    grid += '<p class="item__year"> Year: ' + data.inv_year + "</p>";
+    grid += '<p class="item__descrip">' + data.inv_description + "</p>";
+    grid +=
+      '<span class="item__price">$' +
+      new Intl.NumberFormat("en-US").format(data.inv_price) +
+      "</span>";
+    grid +=
+      '<p class="item__miles"> Miles: ' +
+      new Intl.NumberFormat("en-US", { style: "decimal" }).format(
+        data.inv_miles
+      ) +
+      "</p>";
+    grid += '<p class="item__color"> Color: ' + data.inv_color + "</p>";
   } else {
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
   }
