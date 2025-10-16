@@ -97,10 +97,13 @@ Util.buildInventoryItemGrid = async function (data) {
       " " +
       data.inv_model +
       "</h2>";
-    grid += '<p class="item__year"> Year: ' + data.inv_year + "</p>";
+    grid +=
+      '<section class="item_infobox"> <p class="item__year"> Year: ' +
+      data.inv_year +
+      "</p>";
     grid += '<p class="item__descrip">' + data.inv_description + "</p>";
     grid +=
-      '<span class="item__price">$' +
+      '<span class="item__price">Price: $' +
       new Intl.NumberFormat("en-US").format(data.inv_price) +
       "</span>";
     grid +=
@@ -109,7 +112,8 @@ Util.buildInventoryItemGrid = async function (data) {
         data.inv_miles
       ) +
       "</p>";
-    grid += '<p class="item__color"> Color: ' + data.inv_color + "</p>";
+    grid +=
+      '<p class="item__color"> Color: ' + data.inv_color + "</p> </section>";
   } else {
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
   }
