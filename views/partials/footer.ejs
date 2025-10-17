@@ -4,4 +4,8 @@ let year = d.getFullYear() %>
 
 <footer>
   <p class="copyright">&copy; <%= year %>, CSE 340 App</p>
+  <!-- link to intentionally trigger a server error for testing -->
+  <p class="footer-error-link">
+    <!-- <a href="/debug/cause-error">Trigger server error (500)</a> -->
+  </p>
 </footer>

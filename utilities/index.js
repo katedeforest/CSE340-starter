@@ -84,36 +84,35 @@ Util.buildInventoryItemGrid = async function (data) {
   let grid = "";
   if (data) {
     grid =
-      '<img src="' +
+      '<div class="item"><img src="' +
       data.inv_image +
       '" alt="Image of ' +
       data.inv_make +
       " " +
       data.inv_model +
-      '" class="item__img"></img>';
+      '" class="item__img" />';
     grid +=
-      '<h2 class="item__name">' +
-      data.inv_make +
-      " " +
-      data.inv_model +
-      "</h2>";
-    grid +=
-      '<section class="item_infobox"> <p class="item__year"> Year: ' +
-      data.inv_year +
-      "</p>";
-    grid += '<p class="item__descrip">' + data.inv_description + "</p>";
+      '<p class="item__name">' + data.inv_make + " " + data.inv_model + "</p>";
     grid +=
       '<span class="item__price">Price: $' +
       new Intl.NumberFormat("en-US").format(data.inv_price) +
       "</span>";
     grid +=
-      '<p class="item__miles"> Miles: ' +
+      '<div class="item__infobox"> <p class="item__infobox-year"> Year: ' +
+      data.inv_year +
+      "</p>";
+    grid +=
+      '<p class="item__infobox-miles"> Miles: ' +
       new Intl.NumberFormat("en-US", { style: "decimal" }).format(
         data.inv_miles
       ) +
       "</p>";
     grid +=
-      '<p class="item__color"> Color: ' + data.inv_color + "</p> </section>";
+      '<p class="item__infobox-color"> Color: ' + data.inv_color + "</p> ";
+    grid +=
+      '<p class="item__infobox-descrip">' +
+      data.inv_description +
+      "</p></div></div>";
   } else {
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
   }
