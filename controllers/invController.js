@@ -37,4 +37,14 @@ invCont.buildByInvId = async function (req, res, next) {
   });
 };
 
+/* ***************************
+ *  Force an error
+ * ************************** */
+invCont.forcedError = async function (req, res, next) {
+  const myError = new Error("You found the Secret Error!");
+  myError.status = 500;
+  myError.message = "You found the Secret Error!";
+  throw myError;
+};
+
 module.exports = invCont;

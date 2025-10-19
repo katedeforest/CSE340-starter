@@ -11,7 +11,6 @@ const env = require("dotenv").config();
 const app = express();
 const static = require("./routes/static");
 const inventoryRoute = require("./routes/inventoryRoute");
-// const debugRoute = require("./routes/debugRoute");
 const baseController = require("./controllers/baseController");
 const utilities = require("./utilities/");
 
@@ -29,9 +28,7 @@ app.use(static);
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome));
 // Inventory routes
-app.use("/inv", inventoryRoute);
-// Debug/test routes (intentional error)
-// app.use("/debug", debugRoute);
+app.use("/inv", utilities.handleErrors(inventoryRoute));
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({ status: 404, message: "Sorry, we appear to have lost that page." });
@@ -49,8 +46,8 @@ app.use(async (err, req, res, next) => {
   } else {
     message = "Oh no! There was a crash. Maybe try a different route?";
   }
-  res.render("errors/error", {
-    title: err.status || "Server Error",
+  res.render("errors/forcedError", {
+    title: err.status || "Server Error: 500",
     message,
     nav,
   });
