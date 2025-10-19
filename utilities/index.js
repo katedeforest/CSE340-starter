@@ -94,7 +94,7 @@ Util.buildInventoryItemGrid = async function (data) {
     grid +=
       '<p class="item__name">' + data.inv_make + " " + data.inv_model + "</p>";
     grid +=
-      '<span class="item__price">Price: $' +
+      '<span class="item__price">$' +
       new Intl.NumberFormat("en-US").format(data.inv_price) +
       "</span>";
     grid +=
