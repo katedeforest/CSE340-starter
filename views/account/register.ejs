@@ -1,0 +1,54 @@
+<!-- messages -->
+<%- messages() %>
+
+<div class="account__register">
+  <!-- content heading -->
+  <% if (title) { %>
+  <h1 class="account__register-title"><%= title %></h1>
+  <% } else { res.redirect('/') } %>
+
+  <!-- registration HTML form that accepts four inputs: first name, last name, email address and password. Each input should be of the correct input type-->
+  <form class="account__register-form">
+    <label for="account_firstname">First Name: </label>
+    <br />
+    <input
+      type="text"
+      id="account_firstname-register"
+      name="account_firstname"
+      required
+    />
+    <br />
+    <label for="account_lastname">Last Name: </label>
+    <br />
+    <input
+      type="text"
+      id="account_lastname-register"
+      name="account_lastname"
+      required
+    />
+    <br />
+    <label for="account_email">Email Address: </label>
+    <br />
+    <input
+      type="email"
+      id="account_email-register"
+      name="account_email"
+      required
+    />
+    <br />
+    <label for="account_password">Password: </label>
+    <br />
+    <input
+      type="password"
+      id="account_password-register"
+      name="account_password"
+      pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+\-]).{12,}$"
+      required
+    />
+    <br />
+    <!--  a button to submit the registration data -->
+    <div class="account__register-form-button">
+      <button type="button">REGISTER</button>
+    </div>
+  </form>
+</div>

@@ -270,8 +270,9 @@ hr.divider {
   color: #7c0902;
 }
 
-/* ********* Account Login View ********* */
-.account__login {
+/* ********* Account Login and Registraion Views ********* */
+.account__login,
+.account__register {
   margin-top: 3em;
   padding: 1em;
   justify-self: center;
@@ -280,25 +281,30 @@ hr.divider {
   border-radius: 5px;
 }
 
-.account__login-title {
+.account__login-title,
+.account__register-title {
   text-align: center;
 }
 
-.account__login-form {
+.account__login-form,
+.account__register-form {
   padding: 1em;
   background-color: #7c0902;
   color: white;
 }
 
-.account__login-form > *:not(:last-child) {
+.account__login-form > *:not(:last-child),
+.account__register-form > *:not(:last-child) {
   margin-bottom: 1em;
 }
 
-.account__login-form-button {
+.account__login-form-button,
+.account__register-form-button {
   text-align: center;
 }
 
-.account__login-form-button button {
+.account__login-form-button button,
+.account__register-form-button button {
   padding: 0.5em;
   background-color: white;
   border-radius: 10px;
