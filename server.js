@@ -54,11 +54,12 @@ app.use(static);
 app.get("/", utilities.handleErrors(baseController.buildHome));
 // Inventory routes
 app.use("/inv", utilities.handleErrors(inventoryRoute));
+// Account routes
+app.use("/account", utilities.handleErrors(accountRoute));
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({ status: 404, message: "Sorry, we appear to have lost that page." });
 });
-app.use("/account", utilities.handleErrors(accountRoute));
 
 /* ***********************
  * Express Error Handler
@@ -72,8 +73,8 @@ app.use(async (err, req, res, next) => {
   } else {
     message = "Oh no! There was a crash. Maybe try a different route?";
   }
-  res.render("errors/forcedError", {
-    title: err.status || "Server Error: 500",
+  res.render("errors/error", {
+    title: err.status || "500",
     message,
     nav,
   });
