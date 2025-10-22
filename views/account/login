@@ -1,0 +1,11 @@
+<!-- content heading -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
+
+<!-- messages -->
+<%- messages() %>
+
+<!-- login HTML form that accepts an email adress and password-->
+<!-- includes a button to submit the login credentials -->
+<!-- link that allows the user to send a URL that would request delivery of a registration view (if they do not yet have an account) -->
