@@ -244,6 +244,32 @@ hr.divider {
   width: 100%;
 }
 
+/* ********* Flash Messages ********* */
+.notice,
+.error {
+  padding: 0;
+  text-align: center;
+  list-style: none;
+}
+.notice li,
+.error li {
+  padding: 1em;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.notice {
+  background-color: #adf8ff;
+}
+
+.error {
+  border: 3px dotted #7c0902;
+}
+
+.error li {
+  color: #7c0902;
+}
+
 @media screen and (min-width: 750px) {
   body {
     margin: 15px;
