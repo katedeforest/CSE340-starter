@@ -1,5 +1,13 @@
 <!-- messages -->
 <%- messages() %>
+<!-- errors -->
+<% if (errors!=null) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
 
 <div class="account__register">
   <!-- content heading -->
@@ -8,7 +16,7 @@
   <% } else { res.redirect('/') } %>
 
   <!-- registration HTML form that accepts four inputs: first name, last name, email address and password. Each input should be of the correct input type-->
-  <form class="account__register-form">
+  <form action="/account/register" method="post" class="account__register-form">
     <label for="account_firstname">First Name: </label>
     <br />
     <input
@@ -42,13 +50,17 @@
       type="password"
       id="account_password-register"
       name="account_password"
-      pattern="^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+\-]).{12,}$"
       required
+      pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
     />
+    <div class="pass-reqs">
+      Passwords must be at least 12 characters and contain at least 1 number, 1
+      capital letter and 1 special character.
+    </div>
     <br />
     <!--  a button to submit the registration data -->
     <div class="account__register-form-button">
-      <button type="button">REGISTER</button>
+      <button type="submit">REGISTER</button>
     </div>
   </form>
 </div>
