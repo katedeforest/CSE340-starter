@@ -1,5 +1,13 @@
 <!-- messages -->
 <%- messages() %>
+<!-- errors -->
+<% if (errors!=null) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
 
 <div class="account__login">
   <!-- content heading -->
@@ -8,7 +16,12 @@
   <% } else { res.redirect('/') } %>
 
   <!-- login HTML form that accepts an email adress and password-->
-  <form class="account__login-form">
+  <form
+    id="loginForm"
+    action="/account/login"
+    method="post"
+    class="account__login-form"
+  >
     <label for="account_email">Email Address: </label>
     <br />
     <input type="email" id="account_email" name="account_email" required />
