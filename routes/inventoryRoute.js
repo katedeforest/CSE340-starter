@@ -16,7 +16,4 @@ router.get(
   utilities.handleErrors(invController.buildByInvId)
 );
 
-// Forced error footer button route
-router.get("/forcedError", utilities.handleErrors(invController.forcedError));
-
 module.exports = router;
