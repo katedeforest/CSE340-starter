@@ -172,7 +172,7 @@ footer {
   font-size: 12px;
 }
 
-/* ********* Inventory Pages ********* */
+/* ********* Classification Views ********* */
 #inv-display {
   padding: 0;
   display: flex;
@@ -216,7 +216,7 @@ hr.divider {
   color: #fff;
 }
 
-/* ********* Item Pages ********* */
+/* ********* Inventory Item Views ********* */
 .item {
   justify-self: center;
   display: grid;
@@ -242,6 +242,35 @@ hr.divider {
 
 .item__infobox {
   width: 100%;
+}
+
+/* ********* Management View ********* */
+.manage-data {
+  justify-self: center;
+  width: 75%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.manage-data__card {
+  margin-bottom: 3em;
+  flex: 1 1 225px;
+  text-align: center;
+}
+
+.add--button {
+  padding: 1em 2em;
+  background-color: #adf8ff;
+  color: #000;
+  border-radius: 1em;
+  box-shadow: 1px 1px 2px #000;
+}
+
+.add--button:hover {
+  border: none;
+  box-shadow: 2px 2px 3px #000;
 }
 
 /* ********* Flash Messages ********* */

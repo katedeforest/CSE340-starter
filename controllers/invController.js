@@ -37,4 +37,18 @@ invCont.buildByInvId = async function (req, res, next) {
   });
 };
 
+/* ***************************
+ *  Deliver Management view
+ * ************************** */
+invCont.buildManagement = async function (req, res, next) {
+  let nav = await utilities.getNav();
+  const grid = await utilities.buildManagementGrid();
+  res.render("./inventory/management", {
+    title: "Manage Data",
+    nav,
+    grid,
+    errors: null,
+  });
+};
+
 module.exports = invCont;

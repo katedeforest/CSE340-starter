@@ -62,7 +62,7 @@ Util.buildClassificationGrid = async function (data) {
         " " +
         vehicle.inv_model +
         "</a>";
-      grid += '</h2">';
+      grid += "</h2>";
       grid +=
         '<span class="sale-price">$' +
         new Intl.NumberFormat("en-US").format(vehicle.inv_price) +
@@ -116,6 +116,28 @@ Util.buildInventoryItemGrid = async function (data) {
   } else {
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>';
   }
+  return grid;
+};
+
+/* **************************************
+ * Build the management view HTML
+ * ************************************ */
+Util.buildManagementGrid = async function () {
+  let grid = '<div class="manage-data">';
+
+  grid += '<div class="manage-data__card">';
+  grid += '<h2 class="add--title">Classification</h2>';
+  grid +=
+    '<a href="inv/management/addClassification" class="add--button">Add new Classification</a>';
+  grid += "</div>";
+
+  grid += '<div class="manage-data__card">';
+  grid += '<h2 class="add--title">Inventory</h2>';
+  grid +=
+    '<a href="inv/management/addInventory" class="add--button">Add new Inventory Item</a>';
+  grid += "</div>";
+
+  grid += "</div>";
   return grid;
 };
 

@@ -6,6 +6,8 @@ let year = d.getFullYear() %>
   <p class="copyright">&copy; <%= year %>, CSE 340 App</p>
   <!-- link to intentionally trigger a server error for testing -->
   <p class="footer-error-link">
-    <a href="/errors/forcedError">Secret Error</a>
+    <!-- this first version didn't work because it isn't trying to pull database data -->
+    <!-- <a href="/errors/forcedError">Secret Error</a> -->
+    <a href="/inv/detail/99">Secret Error</a>
   </p>
 </footer>

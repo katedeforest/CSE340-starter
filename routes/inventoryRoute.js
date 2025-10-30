@@ -16,4 +16,10 @@ router.get(
   utilities.handleErrors(invController.buildByInvId)
 );
 
+// Route to build management view
+router.get(
+  "/management",
+  utilities.handleErrors(invController.buildManagement)
+);
+
 module.exports = router;
