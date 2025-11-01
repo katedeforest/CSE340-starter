@@ -128,13 +128,13 @@ Util.buildManagementGrid = async function () {
   grid += '<div class="manage-data__card">';
   grid += '<h2 class="add--title">Classification</h2>';
   grid +=
-    '<a href="inv/management/addClassification" class="add--button">Add new Classification</a>';
+    '<a href="add-classification" class="add--button">Add new Classification</a>';
   grid += "</div>";
 
   grid += '<div class="manage-data__card">';
   grid += '<h2 class="add--title">Inventory</h2>';
   grid +=
-    '<a href="inv/management/addInventory" class="add--button">Add new Inventory Item</a>';
+    '<a href="add-inventory" class="add--button">Add new Inventory Item</a>';
   grid += "</div>";
 
   grid += "</div>";

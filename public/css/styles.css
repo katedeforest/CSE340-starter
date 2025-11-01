@@ -300,8 +300,8 @@ hr.divider {
 }
 
 /* ********* Account Login and Registraion Views ********* */
-.account__login,
-.account__register {
+
+.form-card {
   margin-top: 3em;
   padding: 1em;
   justify-self: center;
@@ -311,46 +311,40 @@ hr.divider {
   border-radius: 5px;
 }
 
-.account__login-title,
-.account__register-title {
+.form-card-title {
   text-align: center;
 }
 
-.account__login-form,
-.account__register-form {
+.form-card-form {
   padding: 1em;
   background-color: #7c0902;
   color: white;
 }
 
-.account__login-form > *:not(:last-child),
-.account__register-form > *:not(:last-child) {
+.form-card-form > *:not(:last-child) {
   margin-bottom: 1em;
 }
 
-.account__login-form-button,
-.account__register-form-button {
+.form-card-button {
   text-align: center;
 }
 
-.account__login-form-button button,
-.account__register-form-button button {
+.form-card-button button {
   padding: 0.5em;
   background-color: white;
   border-radius: 10px;
 }
 
-.account__login-form p {
+.form-card-form p {
   margin: 0;
   text-align: center;
 }
 
-.account__login-form p a {
+.form-card-form p a {
   color: white;
 }
 
-#account_email,
-#account_password {
+.input {
   width: 100%;
   padding: 0.5em;
 }

@@ -1,0 +1,41 @@
+<!--messages-->
+<%- messages() %>
+<!-- errors -->
+<% if (errors!=null) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="form-card addClass">
+  <!-- content heading -->
+  <% if (title) { %>
+  <h1 class="form-card-title addClass-title"><%= title %></h1>
+  <% } else { res.redirect('/') } %>
+
+  <!-- login HTML form that accepts an email adress and password-->
+  <form
+    id="addClass-form"
+    action="/inv/add-classification"
+    method="post"
+    class="form-card-form addClass-form"
+  >
+    <label for="classification_name">Classification: </label>
+    <br />
+    <input
+      type="text"
+      id="classification_name"
+      name="classification_name"
+      required
+      class="input"
+    />
+    <br />
+
+    <!-- includes a button to submit the login credentials -->
+    <div class="form-card-button addClass-button">
+      <button type="submit">ADD</button>
+    </div>
+  </form>
+</div>

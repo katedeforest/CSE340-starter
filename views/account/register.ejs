@@ -9,14 +9,18 @@
 </ul>
 <% } %>
 
-<div class="account__register">
+<div class="form-card account__register">
   <!-- content heading -->
   <% if (title) { %>
-  <h1 class="account__register-title"><%= title %></h1>
+  <h1 class="form-card-title account__register-title"><%= title %></h1>
   <% } else { res.redirect('/') } %>
 
   <!-- registration HTML form that accepts four inputs: first name, last name, email address and password. Each input should be of the correct input type-->
-  <form action="/account/register" method="post" class="account__register-form">
+  <form
+    action="/account/register"
+    method="post"
+    class="form-card-form account__register-form"
+  >
     <label for="account_firstname">First Name: </label>
     <br />
     <input
@@ -25,6 +29,7 @@
       name="account_firstname"
       required
       value="<%= locals.account_firstname %>"
+      class="input"
     />
     <br />
     <label for="account_lastname">Last Name: </label>
@@ -35,6 +40,7 @@
       name="account_lastname"
       required
       value="<%= locals.account_lastname %>"
+      class="input"
     />
     <br />
     <label for="account_email">Email Address: </label>
@@ -45,6 +51,7 @@
       name="account_email"
       required
       value="<%= locals.account_email %>"
+      class="input"
     />
     <br />
     <label for="account_password">Password: </label>
@@ -55,6 +62,7 @@
       name="account_password"
       required
       pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+      class="input"
     />
     <div class="pass-reqs">
       Passwords must be at least 12 characters and contain at least 1 number, 1
@@ -62,7 +70,7 @@
     </div>
     <br />
     <!--  a button to submit the registration data -->
-    <div class="account__register-form-button">
+    <div class="form-card-button account__register-form-button">
       <button type="submit">REGISTER</button>
     </div>
   </form>

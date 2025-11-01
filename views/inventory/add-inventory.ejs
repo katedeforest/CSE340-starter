@@ -1,0 +1,82 @@
+<!--messages-->
+<%- messages() %>
+<!-- errors -->
+<% if (errors!=null) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="form-card addInv">
+  <!-- content heading -->
+  <% if (title) { %>
+  <h1 class="form-card-title addInv-title"><%= title %></h1>
+  <% } else { res.redirect('/') } %>
+
+  <!-- login HTML form that accepts an email adress and password-->
+  <form
+    id="addInv-form"
+    action="/inv/add-inventory"
+    method="post"
+    class="form-card-form addInv-form"
+  >
+    <label for="inv_make">Make: </label>
+    <br />
+    <input type="text" id="inv_make" name="inv_make" required class="input" />
+    <br />
+
+    <label for="inv_model">Model: </label>
+    <br />
+    <input type="text" id="inv_model" name="inv_model" required class="input" />
+    <br />
+
+    <label for="inv_year">Year: </label>
+    <br />
+    <input type="text" id="inv_year" name="inv_year" required class="input" />
+    <br />
+
+    <label for="inv_description">Description: </label>
+    <br />
+    <input
+      type="text"
+      id="inv_description"
+      name="inv_description"
+      required
+      class="input"
+    />
+    <br />
+
+    <label for="inv_price">Price: </label>
+    <br />
+    <input type="text" id="inv_price" name="inv_price" required class="input" />
+    <br />
+
+    <label for="inv_miles">Miles: </label>
+    <br />
+    <input type="text" id="inv_miles" name="inv_miles" required class="input" />
+    <br />
+
+    <label for="inv_color">Color: </label>
+    <br />
+    <input type="text" id="inv_color" name="inv_color" required class="input" />
+    <br />
+
+    <label for="classification_id">Classification ID: </label>
+    <br />
+    <input
+      type="text"
+      id="classification_id"
+      name="classification_id"
+      required
+      class="input"
+    />
+    <br />
+
+    <!-- includes a button to submit the login credentials -->
+    <div class="form-card-button addInv-button">
+      <button type="submit">ADD</button>
+    </div>
+  </form>
+</div>
