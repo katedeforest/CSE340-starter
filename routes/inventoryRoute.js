@@ -3,6 +3,7 @@ const express = require("express");
 const router = new express.Router();
 const invController = require("../controllers/invController");
 const utilities = require("../utilities/");
+const regValidate = require("../utilities/inventory-validation");
 
 // Route to build inventory by classification view
 router.get(
@@ -28,10 +29,13 @@ router.get(
   utilities.handleErrors(invController.buildAddClass)
 );
 
-// // Process the add classification attempt
-// router.post("/add-classification", (req, res) => {
-//   res.status(200).send("add classification process");
-// });
+// Process the add classification attempt
+router.post(
+  "/add-classification",
+  regValidate.addClassRules(),
+  regValidate.checkClassData,
+  utilities.handleErrors(invController.addClassification)
+);
 
 // Route to build add inventory view
 router.get("/add-inventory", utilities.handleErrors(invController.buildAddInv));

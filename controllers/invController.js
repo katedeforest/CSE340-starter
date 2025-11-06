@@ -1,6 +1,5 @@
 const invModel = require("../models/inventory-model");
 const utilities = require("../utilities/");
-
 const invCont = {};
 
 /* ***************************
@@ -63,36 +62,37 @@ invCont.buildAddClass = async function (req, res, next) {
   });
 };
 
-// /* ****************************************
-//  *  Process Add Classification
-//  * *************************************** */
-// invCont.addClassification = async function (req, res) {
-//   let nav = await utilities.getNav();
-//   const { classification_name } = req.body;
+/* ****************************************
+ *  Process Add Classification
+ * *************************************** */
+invCont.addClassification = async function (req, res) {
+  let nav = await utilities.getNav();
+  const { classification_name } = req.body;
+  const grid = await utilities.buildManagementGrid();
 
-//   const addClassResult = await accountModel.registerAccount(
-//     classification_name
-//   );
+  // use the inventory model's addClassification function
+  const addClassResult = await invModel.addClassification(classification_name);
 
-//   if (addClassResult) {
-//     req.flash(
-//       "notice",
-//       `Congratulations, ${classification_name} has been added to your classifications.`
-//     );
-//     res.status(201).render("inventory/management", {
-//       title: "Management",
-//       nav,
-//       errors: null,
-//     });
-//   } else {
-//     req.flash("notice", "Sorry, adding the classification failed.");
-//     res.status(501).render("inventory/add-classification", {
-//       title: "Add Classfication",
-//       nav,
-//       errors: null,
-//     });
-//   }
-// };
+  if (addClassResult) {
+    req.flash(
+      "notice",
+      `Congratulations, ${classification_name} has been added to your classifications.`
+    );
+    res.status(201).render("inventory/management", {
+      title: "Manage Data",
+      nav,
+      grid,
+      errors: null,
+    });
+  } else {
+    req.flash("notice", "Sorry, adding the classification failed.");
+    res.status(501).render("inventory/add-classification", {
+      title: "Add Classification",
+      nav,
+      errors: null,
+    });
+  }
+};
 
 /* ***************************
  *  Deliver Add Inventory view

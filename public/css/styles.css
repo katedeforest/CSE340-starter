@@ -305,7 +305,7 @@ hr.divider {
   margin-top: 3em;
   padding: 1em;
   justify-self: center;
-  width: max-content;
+  width: 325px;
   max-width: 400px;
   border: 5px solid #7c0902;
   border-radius: 5px;
@@ -360,6 +360,21 @@ hr.divider {
 .pass-reqs {
   font-size: 10px;
   font-style: italic;
+}
+
+input:required:invalid,
+input:focus:invalid {
+  background-image: url("../images/site/xmark.svg");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  border: 1px solid red;
+}
+input:required:valid {
+  background-image: url("../images/site/checkmark.svg");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
 }
 
 @media screen and (min-width: 750px) {
