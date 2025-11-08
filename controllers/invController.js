@@ -99,11 +99,67 @@ invCont.addClassification = async function (req, res) {
  * ************************** */
 invCont.buildAddInv = async function (req, res, next) {
   let nav = await utilities.getNav();
+  const classificationList = await utilities.buildClassificationList();
   res.render("./inventory/add-inventory", {
     title: "Add Inventory Item",
     nav,
+    classificationList,
     errors: null,
   });
+};
+
+/* ****************************************
+ *  Process Add Inventory
+ * *************************************** */
+invCont.addInventory = async function (req, res) {
+  let nav = await utilities.getNav();
+  const {
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+  const inv_image = "/images/vehicles/no-image.png";
+  const inv_thumbnail = "/images/vehicles/no-image-tn.png";
+  const grid = await utilities.buildManagementGrid();
+
+  // use the inventory model's addInventory function
+  const addInvResult = await invModel.addInventory(
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id
+  );
+
+  if (addInvResult) {
+    req.flash(
+      "notice",
+      `Congratulations, ${inv_make} ${inv_model} has been added to your inventory.`
+    );
+    res.status(201).render("inventory/management", {
+      title: "Manage Data",
+      nav,
+      grid,
+      errors: null,
+    });
+  } else {
+    req.flash("notice", "Sorry, adding the inventory item failed.");
+    res.status(501).render("inventory/add-inventory", {
+      title: "Add Inventory",
+      nav,
+      errors: null,
+    });
+  }
 };
 
 module.exports = invCont;

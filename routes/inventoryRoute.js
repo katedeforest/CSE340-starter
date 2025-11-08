@@ -40,4 +40,12 @@ router.post(
 // Route to build add inventory view
 router.get("/add-inventory", utilities.handleErrors(invController.buildAddInv));
 
+// Process the add classification attempt
+router.post(
+  "/add-inventory",
+  regValidate.addInvRules(),
+  regValidate.checkInvData,
+  utilities.handleErrors(invController.addInventory)
+);
+
 module.exports = router;

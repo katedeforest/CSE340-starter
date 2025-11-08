@@ -24,17 +24,38 @@
   >
     <label for="inv_make">Make: </label>
     <br />
-    <input type="text" id="inv_make" name="inv_make" required class="input" />
+    <input
+      type="text"
+      id="inv_make"
+      name="inv_make"
+      required
+      class="input"
+      value="<%= locals.inv_make %>"
+    />
     <br />
 
     <label for="inv_model">Model: </label>
     <br />
-    <input type="text" id="inv_model" name="inv_model" required class="input" />
+    <input
+      type="text"
+      id="inv_model"
+      name="inv_model"
+      required
+      class="input"
+      value="<%= locals.inv_model %>"
+    />
     <br />
 
     <label for="inv_year">Year: </label>
     <br />
-    <input type="text" id="inv_year" name="inv_year" required class="input" />
+    <input
+      type="number"
+      id="inv_year"
+      name="inv_year"
+      required
+      class="input"
+      value="<%= locals.inv_year %>"
+    />
     <br />
 
     <label for="inv_description">Description: </label>
@@ -45,33 +66,49 @@
       name="inv_description"
       required
       class="input"
+      value="<%= locals.inv_description %>"
     />
     <br />
 
     <label for="inv_price">Price: </label>
     <br />
-    <input type="text" id="inv_price" name="inv_price" required class="input" />
+    <input
+      type="number"
+      id="inv_price"
+      name="inv_price"
+      required
+      class="input"
+      value="<%= locals.inv_price %>"
+    />
     <br />
 
     <label for="inv_miles">Miles: </label>
     <br />
-    <input type="text" id="inv_miles" name="inv_miles" required class="input" />
+    <input
+      type="number"
+      id="inv_miles"
+      name="inv_miles"
+      required
+      class="input"
+      value="<%= locals.inv_miles %>"
+    />
     <br />
 
     <label for="inv_color">Color: </label>
     <br />
-    <input type="text" id="inv_color" name="inv_color" required class="input" />
+    <input
+      type="text"
+      id="inv_color"
+      name="inv_color"
+      required
+      class="input"
+      value="<%= locals.inv_color %>"
+    />
     <br />
 
     <label for="classification_id">Classification ID: </label>
     <br />
-    <input
-      type="text"
-      id="classification_id"
-      name="classification_id"
-      required
-      class="input"
-    />
+    <%-classificationList%>
     <br />
 
     <!-- includes a button to submit the login credentials -->
