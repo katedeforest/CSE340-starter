@@ -10,8 +10,6 @@ validate.addClassRules = () => {
   return [
     // name is required and must be a string with no spaces or special characters
     body("classification_name")
-      .trim()
-      .escape()
       .notEmpty()
       .isLength({ min: 1 })
       .matches(/^[A-Za-z0-9_-]+$/)
