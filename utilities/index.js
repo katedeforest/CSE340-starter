@@ -144,7 +144,7 @@ Util.buildManagementGrid = async function () {
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await invModel.getClassifications();
   let classificationList =
-    '<select name="classification_id" id="classificationList" class="input" value="<%= locals.classification_id %>" required>';
+    '<select name="classification_id" id="classification_id" class="input" required>';
   classificationList += "<option value=''>Choose a Classification</option>";
   data.rows.forEach((row) => {
     classificationList += '<option value="' + row.classification_id + '"';
