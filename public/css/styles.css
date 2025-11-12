@@ -363,14 +363,17 @@ hr.divider {
 }
 
 input:required:invalid,
-input:focus:invalid {
+input:focus:invalid,
+textarea:required:invalid,
+textarea:focus:invalid {
   background-image: url("../images/site/xmark.svg");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 1rem;
   border: 1px solid red;
 }
-input:required:valid {
+input:required:valid,
+textarea:required:valid {
   background-image: url("../images/site/checkmark.svg");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
