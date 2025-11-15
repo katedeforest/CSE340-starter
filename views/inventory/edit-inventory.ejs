@@ -1,0 +1,127 @@
+<!--messages-->
+<%- messages() %>
+<!-- errors -->
+<% if (errors!=null) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="form-card editInv">
+  <!-- content heading -->
+  <% if (title) { %>
+  <h1 class="form-card-title editInv-title"><%= title %></h1>
+  <% } else { res.redirect('/') } %>
+
+  <!-- login HTML form that accepts an email adress and password-->
+  <form
+    id="editInv-form"
+    action="/inv/edit-inventory"
+    method="post"
+    class="form-card-form editInv-form"
+  >
+    <label for="inv_make">Make: </label>
+    <br />
+    <input
+      type="text"
+      id="inv_make"
+      name="inv_make"
+      required
+      class="input"
+      value="<%= inv_make %>"
+    />
+    <br />
+
+    <label for="inv_model">Model: </label>
+    <br />
+    <input
+      type="text"
+      id="inv_model"
+      name="inv_model"
+      required
+      class="input"
+      value="<%= inv_model %>"
+    />
+    <br />
+
+    <label for="inv_year">Year: </label>
+    <br />
+    <input
+      type="number"
+      id="inv_year"
+      name="inv_year"
+      required
+      class="input"
+      value="<%= inv_year %>"
+    />
+    <br />
+
+    <label for="inv_description">Description: </label>
+    <br />
+    <textarea
+      id="inv_description"
+      name="inv_description"
+      required
+      class="input"
+      rows="5"
+    >
+<%= inv_description %></textarea
+    >
+    <br />
+
+    <label for="inv_price">Price: </label>
+    <br />
+    <input
+      type="number"
+      id="inv_price"
+      name="inv_price"
+      required
+      class="input"
+      value="<%= inv_price %>"
+    />
+    <br />
+
+    <label for="inv_miles">Miles: </label>
+    <br />
+    <input
+      type="number"
+      id="inv_miles"
+      name="inv_miles"
+      required
+      class="input"
+      value="<%= inv_miles %>"
+    />
+    <br />
+
+    <label for="inv_color">Color: </label>
+    <br />
+    <input
+      type="text"
+      id="inv_color"
+      name="inv_color"
+      required
+      class="input"
+      value="<%= inv_color %>"
+    />
+    <br />
+
+    <label for="classification_id">Classification ID: </label>
+    <br />
+    <%-classificationList%>
+    <br />
+
+    <!-- includes a button to submit the login credentials -->
+    <div class="form-card-button editInv-button">
+      <button type="submit" disabled>FINISH EDITING</button>
+    </div>
+
+    <!-- hidden input -->
+    <!-- prettier-ignore -->
+    <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%=
+    locals.inv_id %>" <% } %>>
+  </form>
+</div>
+
+<script src="/js/inv-update.js"></script>

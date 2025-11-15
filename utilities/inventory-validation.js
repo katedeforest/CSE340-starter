@@ -110,7 +110,7 @@ validate.addInvRules = () => {
 };
 
 /* ******************************
- * Check data and return errors or continue to home page
+ * Check data and return errors on add-inventory view or continue to home page
  * ***************************** */
 validate.checkInvData = async (req, res, next) => {
   const {
@@ -134,6 +134,47 @@ validate.checkInvData = async (req, res, next) => {
       errors,
       title: "Add Inventory",
       nav,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classificationList,
+    });
+    return;
+  }
+  next();
+};
+
+/* ******************************
+ * Check data and return errors on edit-inventory view or continue to home page
+ * ***************************** */
+validate.checkEditData = async (req, res, next) => {
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+  let errors = [];
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let nav = await utilities.getNav();
+    const classificationList = await utilities.buildClassificationList(
+      classification_id
+    );
+    res.render("inventory/edit-inventory", {
+      errors,
+      title: "Edit Inventory",
+      nav,
+      inv_id,
       inv_make,
       inv_model,
       inv_year,

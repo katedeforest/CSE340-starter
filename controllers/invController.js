@@ -179,4 +179,104 @@ invCont.getInventoryJSON = async (req, res, next) => {
   }
 };
 
+/* ***************************
+ *  Deliver Edit Inventory view
+ * ************************** */
+invCont.buildEditInventory = async function (req, res, next) {
+  const inv_id = parseInt(req.params.inventory_id);
+  let nav = await utilities.getNav();
+
+  // const itemData = await invModel.getInventoryById(inv_id);
+  const data = await invModel.getItemByInvId(inv_id);
+  const itemData = data[0];
+
+  const classificationSelect = await utilities.buildClassificationList(
+    itemData.classification_id
+  );
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
+  res.render("./inventory/edit-inventory", {
+    title: "Edit " + itemName,
+    nav,
+    classificationList: classificationSelect,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_description: itemData.inv_description,
+    inv_image: itemData.inv_image,
+    inv_thumbnail: itemData.inv_thumbnail,
+    inv_price: itemData.inv_price,
+    inv_miles: itemData.inv_miles,
+    inv_color: itemData.inv_color,
+    classification_id: itemData.classification_id,
+  });
+};
+
+/* ****************************************
+ *  Process Edit Inventory
+ * *************************************** */
+invCont.editInventory = async function (req, res) {
+  let nav = await utilities.getNav();
+  const {
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id,
+  } = req.body;
+  const inv_image = "/images/vehicles/no-image.png";
+  const inv_thumbnail = "/images/vehicles/no-image-tn.png";
+  const grid = await utilities.buildManagementGrid();
+
+  // use the inventory model's addInventory function
+  const editInvResult = await invModel.editInventory(
+    inv_id,
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_description,
+    inv_image,
+    inv_thumbnail,
+    inv_price,
+    inv_miles,
+    inv_color,
+    classification_id
+  );
+
+  if (editInvResult) {
+    req.flash(
+      "notice",
+      `Congratulations, ${inv_make} ${inv_model} was successfully edited.`
+    );
+    res.redirect("/inv/management");
+  } else {
+    const classificationSelect = await utilities.buildClassificationList(
+      classification_id
+    );
+    const itemName = `${inv_make} ${inv_model}`;
+    req.flash("notice", "Sorry, the insert failed.");
+    res.status(501).render("inventory/edit-inventory", {
+      title: "Edit " + itemName,
+      nav,
+      classificationSelect: classificationSelect,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id,
+    });
+  }
+};
 module.exports = invCont;

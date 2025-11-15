@@ -40,7 +40,7 @@ router.post(
 // Route to build add inventory view
 router.get("/add-inventory", utilities.handleErrors(invController.buildAddInv));
 
-// Process the add classification attempt
+// Process the add inventory attempt
 router.post(
   "/add-inventory",
   regValidate.addInvRules(),
@@ -48,9 +48,24 @@ router.post(
   utilities.handleErrors(invController.addInventory)
 );
 
+// build mangement view's classification table
 router.get(
   "/getInventory/:classification_id",
   utilities.handleErrors(invController.getInventoryJSON)
+);
+
+// editing iventory item from management view
+router.get(
+  "/edit-inventory/:inventory_id",
+  utilities.handleErrors(invController.buildEditInventory)
+);
+
+// update inventory item (submit button from edit inventory view)
+router.post(
+  "/edit-inventory/",
+  regValidate.addInvRules(),
+  regValidate.checkEditData,
+  utilities.handleErrors(invController.editInventory)
 );
 
 module.exports = router;
