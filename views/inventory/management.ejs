@@ -8,3 +8,18 @@
 
 <!-- management view links -->
 <%- grid %>
+
+<h2>Manage Inventory</h2>
+<p>
+  Select a classification from the list to see the items belonging to the
+  classification.
+</p>
+<%- classificationList %>
+<!-- JavaScript hook -->
+<table id="inventoryDisplay"></table>
+<!-- If JavaScript is disabled, alert user that it is required. -->
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<!-- link JavaScript file -->
+<!-- <script src="../public/js/inventory.js"></script> -->
+<script src="/js/inventory.js"></script>
