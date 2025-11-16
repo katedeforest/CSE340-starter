@@ -1,0 +1,89 @@
+<!--messages-->
+<%- messages() %>
+<!-- errors -->
+<% if (errors!=null) { %>
+<ul class="notice">
+  <% errors.array().forEach(error => { %>
+  <li><%= error.msg %></li>
+  <% }) %>
+</ul>
+<% } %>
+
+<div class="form-card deleteInv">
+  <!-- content heading -->
+  <% if (title) { %>
+  <h1 class="form-card-title deleteInv-title"><%= title %></h1>
+  <% } else { res.redirect('/') } %>
+
+  <p>Confirm Deletion - This cannot be undone.</p>
+
+  <!-- login HTML form that accepts an email adress and password-->
+  <form
+    id="deleteInv-form"
+    action="/inv/delete-inventory"
+    method="post"
+    class="form-card-form deleteInv-form"
+  >
+    <label for="inv_make">Make: </label>
+    <br />
+    <input
+      type="text"
+      id="inv_make"
+      name="inv_make"
+      required
+      class="input"
+      value="<%= inv_make %>"
+      readonly
+    />
+    <br />
+
+    <label for="inv_model">Model: </label>
+    <br />
+    <input
+      type="text"
+      id="inv_model"
+      name="inv_model"
+      required
+      class="input"
+      value="<%= inv_model %>"
+      readonly
+    />
+    <br />
+
+    <label for="inv_year">Year: </label>
+    <br />
+    <input
+      type="number"
+      id="inv_year"
+      name="inv_year"
+      required
+      class="input"
+      value="<%= inv_year %>"
+      readonly
+    />
+    <br />
+
+    <label for="inv_price">Price: </label>
+    <br />
+    <input
+      type="number"
+      id="inv_price"
+      name="inv_price"
+      required
+      class="input"
+      value="<%= inv_price %>"
+      readonly
+    />
+    <br />
+
+    <!-- includes a button to submit the login credentials -->
+    <div class="form-card-button deleteInv-button">
+      <button type="submit">DELETE</button>
+    </div>
+
+    <!-- hidden input -->
+    <!-- prettier-ignore -->
+    <input type="hidden" name="inv_id" <% if(locals.inv_id) { %> value="<%=
+    locals.inv_id %>" <% } %>>
+  </form>
+</div>
