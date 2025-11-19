@@ -37,10 +37,12 @@ validate.checkClassData = async (req, res, next) => {
   errors = validationResult(req);
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
+    let headerLink = await utilities.getHeaderLinks(req, res);
     res.render("inventory/add-classification", {
       errors,
       title: "Add Classification",
       nav,
+      headerLink,
       classification_name,
     });
     return;
@@ -127,6 +129,7 @@ validate.checkInvData = async (req, res, next) => {
   errors = validationResult(req);
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
+    let headerLink = await utilities.getHeaderLinks(req, res);
     const classificationList = await utilities.buildClassificationList(
       classification_id
     );
@@ -134,6 +137,7 @@ validate.checkInvData = async (req, res, next) => {
       errors,
       title: "Add Inventory",
       nav,
+      headerLink,
       inv_make,
       inv_model,
       inv_year,
@@ -167,6 +171,7 @@ validate.checkEditData = async (req, res, next) => {
   errors = validationResult(req);
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
+    let headerLink = await utilities.getHeaderLinks(req, res);
     const classificationList = await utilities.buildClassificationList(
       classification_id
     );
@@ -174,6 +179,7 @@ validate.checkEditData = async (req, res, next) => {
       errors,
       title: "Edit Inventory",
       nav,
+      headerLink,
       inv_id,
       inv_make,
       inv_model,

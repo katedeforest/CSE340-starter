@@ -9,9 +9,11 @@ require("dotenv").config();
  * *************************************** */
 async function buildLogin(req, res, next) {
   let nav = await utilities.getNav();
+  let headerLink = await utilities.getHeaderLinks(req, res);
   res.render("account/login", {
     title: "Login",
     nav,
+    headerLink,
     errors: null,
   });
 }
@@ -21,9 +23,11 @@ async function buildLogin(req, res, next) {
  * *************************************** */
 async function buildRegister(req, res, next) {
   let nav = await utilities.getNav();
+  let headerLink = await utilities.getHeaderLinks(req, res);
   res.render("account/register", {
     title: "Register",
     nav,
+    headerLink,
     errors: null,
   });
 }
@@ -33,6 +37,7 @@ async function buildRegister(req, res, next) {
  * *************************************** */
 async function registerAccount(req, res) {
   let nav = await utilities.getNav();
+  let headerLink = await utilities.getHeaderLinks(req, res);
   const {
     account_firstname,
     account_lastname,
@@ -53,6 +58,7 @@ async function registerAccount(req, res) {
     res.status(500).render("account/register", {
       title: "Registration",
       nav,
+      headerLink,
       errors: null,
     });
   }
@@ -72,6 +78,7 @@ async function registerAccount(req, res) {
     res.status(201).render("account/login", {
       title: "Login",
       nav,
+      headerLink,
       errors: null,
     });
   } else {
@@ -79,6 +86,7 @@ async function registerAccount(req, res) {
     res.status(501).render("account/register", {
       title: "Registration",
       nav,
+      headerLink,
       errors: null,
     });
   }
@@ -89,6 +97,7 @@ async function registerAccount(req, res) {
  * ************************************ */
 async function accountLogin(req, res) {
   let nav = await utilities.getNav();
+  let headerLink = await utilities.getHeaderLinks(req, res);
   const { account_email, account_password } = req.body;
   const accountData = await accountModel.getAccountByEmail(account_email);
   if (!accountData) {
@@ -96,6 +105,7 @@ async function accountLogin(req, res) {
     res.status(400).render("account/login", {
       title: "Login",
       nav,
+      headerLink,
       errors: null,
       account_email,
     });
@@ -127,6 +137,7 @@ async function accountLogin(req, res) {
       res.status(400).render("account/login", {
         title: "Login",
         nav,
+        headerLink,
         errors: null,
         account_email,
       });
@@ -136,13 +147,32 @@ async function accountLogin(req, res) {
   }
 }
 
+/* ****************************************
+ *  Build account view
+ * ************************************ */
 async function buildAccount(req, res, next) {
   let nav = await utilities.getNav();
+  let headerLink = await utilities.getHeaderLinks(req, res);
   res.render("account/management", {
     title: "Account",
     nav,
+    headerLink,
     errors: null,
   });
+}
+
+/* ****************************************
+ *  Process logout request
+ * ************************************ */
+async function accountLogout(req, res) {
+  // Clear the JWT cookie
+  res.clearCookie("jwt");
+
+  // Optional: flash message
+  req.flash("notice", "You have been logged out.");
+
+  // Redirect to home page
+  return res.redirect("/");
 }
 
 module.exports = {
@@ -151,4 +181,5 @@ module.exports = {
   registerAccount,
   accountLogin,
   buildAccount,
+  accountLogout,
 };

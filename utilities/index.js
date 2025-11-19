@@ -206,4 +206,28 @@ Util.checkLogin = (req, res, next) => {
   }
 };
 
+/* ************************
+ * Constructs the header login and management links
+ ************************** */
+Util.getHeaderLinks = async function (req, res, next) {
+  let headerLink = "";
+  const account_firstname = res?.locals?.accountData?.account_firstname;
+
+  if (res.locals.loggedin) {
+    // Visible only when logged in
+    headerLink +=
+      `
+      <a title="Go to your account management" href="/account/" class="headerLink--loggedIn">Welcome ` +
+      account_firstname +
+      `</a>
+      <a title="Log out of your account" href="/account/logout" class="headerLink--loggedIn">Logout</a>
+    `;
+  } else {
+    // Visible only when logged out
+    headerLink +=
+      '<a title="Click to log in" href="/account/login" class="headerLink--loggedOut">Login</a>';
+  }
+  return headerLink;
+};
+
 module.exports = Util;

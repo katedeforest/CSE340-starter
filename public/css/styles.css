@@ -53,6 +53,8 @@ a:hover {
 
 #tools {
   grid-column: 3/4;
+  display: flex;
+  gap: 20px;
 }
 
 #tools a {

@@ -73,6 +73,7 @@ app.use(async (req, res, next) => {
  *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav();
+  let headerLink = await utilities.getHeaderLinks(req, res);
   console.error(`Error at: "${req.originalUrl}": ${err.message}`);
   if (err.status == 404) {
     message = err.message;
@@ -83,6 +84,7 @@ app.use(async (err, req, res, next) => {
     title: err.status || "500",
     message,
     nav,
+    headerLink,
   });
 });
 
