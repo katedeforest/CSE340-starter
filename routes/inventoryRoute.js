@@ -20,29 +20,37 @@ router.get(
 // Route to build management view
 router.get(
   "/management",
+  utilities.checkAccountType,
   utilities.handleErrors(invController.buildManagement)
 );
 
 // Route to build add classification view
 router.get(
   "/add-classification",
+  utilities.checkAccountType,
   utilities.handleErrors(invController.buildAddClass)
 );
 
 // Process the add classification attempt
 router.post(
   "/add-classification",
+  utilities.checkAccountType,
   regValidate.addClassRules(),
   regValidate.checkClassData,
   utilities.handleErrors(invController.addClassification)
 );
 
 // Route to build add inventory view
-router.get("/add-inventory", utilities.handleErrors(invController.buildAddInv));
+router.get(
+  "/add-inventory",
+  utilities.checkAccountType,
+  utilities.handleErrors(invController.buildAddInv)
+);
 
 // Process the add inventory attempt
 router.post(
   "/add-inventory",
+  utilities.checkAccountType,
   regValidate.addInvRules(),
   regValidate.checkInvData,
   utilities.handleErrors(invController.addInventory)
@@ -57,12 +65,14 @@ router.get(
 // editing iventory item from management view
 router.get(
   "/edit-inventory/:inventory_id",
+  utilities.checkAccountType,
   utilities.handleErrors(invController.buildEditInventory)
 );
 
 // update inventory item (submit button from edit inventory view)
 router.post(
   "/edit-inventory/",
+  utilities.checkAccountType,
   regValidate.addInvRules(),
   regValidate.checkEditData,
   utilities.handleErrors(invController.editInventory)
@@ -71,12 +81,14 @@ router.post(
 // deleting iventory item from management view
 router.get(
   "/delete-inventory/:inventory_id",
+  utilities.checkAccountType,
   utilities.handleErrors(invController.buildDeleteInventory)
 );
 
 // delete inventory item (submit button from delete inventory view)
 router.post(
   "/delete-inventory/",
+  utilities.checkAccountType,
   utilities.handleErrors(invController.deleteInventory)
 );
 

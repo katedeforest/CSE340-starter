@@ -206,6 +206,35 @@ Util.checkLogin = (req, res, next) => {
   }
 };
 
+/* ****************************************
+ *  Check Account Type
+ * ************************************ */
+Util.checkAccountType = (req, res, next) => {
+  try {
+    const token = req.cookies.jwt;
+    if (!token) {
+      req.flash("notice", "Please log in.");
+      return res.redirect("/account/login");
+    }
+
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+    const account_type = decoded.account_type;
+    if (account_type === "Employee" || account_type === "Admin") {
+      return next();
+    } else {
+      req.flash(
+        "notice",
+        "Please log in as an employee or administrator to access that page."
+      );
+      return res.redirect("/account/login");
+    }
+  } catch (err) {
+    req.flash("notice", "Session expired. Please log in again.");
+    return res.redirect("/account/login");
+  }
+};
+
 /* ************************
  * Constructs the header login and management links
  ************************** */
@@ -217,7 +246,7 @@ Util.getHeaderLinks = async function (req, res, next) {
     // Visible only when logged in
     headerLink +=
       `
-      <a title="Go to your account management" href="/account/" class="headerLink--loggedIn">Welcome ` +
+      <a title="Go to your account management" href="/account" class="headerLink--loggedIn">Welcome ` +
       account_firstname +
       `</a>
       <a title="Log out of your account" href="/account/logout" class="headerLink--loggedIn">Logout</a>
@@ -228,6 +257,40 @@ Util.getHeaderLinks = async function (req, res, next) {
       '<a title="Click to log in" href="/account/login" class="headerLink--loggedOut">Login</a>';
   }
   return headerLink;
+};
+
+/* ************************
+ * Constructs the account management content
+ ************************** */
+Util.getAccountContent = async function (req, res, next) {
+  let accountContent = "";
+  const account_firstname = res?.locals?.accountData?.account_firstname;
+
+  try {
+    const token = req.cookies.jwt;
+    if (!token) {
+      req.flash("notice", "Please log in.");
+      return res.redirect("/account/login");
+    }
+
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const account_type = decoded.account_type;
+
+    // for all accounts
+    accountContent += `<h2>Welcome ` + account_firstname + `</h2>`;
+    accountContent += `<div><h3>Update Account Information</h3>`;
+    accountContent += `<p><a href="/account/update-account">Click here to update your account information.</a></p></div>`;
+
+    if (account_type === "Employee" || account_type === "Admin") {
+      // add for Employee or Admin account
+      accountContent += `<div><h3>Inventory Management</h3>`;
+      accountContent += `<p><a href="/inv/management">Click here to go to the inventory management page.</a></p></div>`;
+    }
+  } catch (err) {
+    req.flash("notice", "Session expired. Please log in again.");
+    return res.redirect("/account/login");
+  }
+  return accountContent;
 };
 
 module.exports = Util;

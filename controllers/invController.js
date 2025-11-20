@@ -41,7 +41,7 @@ invCont.buildByInvId = async function (req, res, next) {
 };
 
 /* ***************************
- *  Deliver Management view
+ *  Deliver Inventory Management view
  * ************************** */
 invCont.buildManagement = async function (req, res, next) {
   let nav = await utilities.getNav();

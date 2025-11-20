@@ -40,5 +40,12 @@ router.get(
   utilities.handleErrors(accountController.buildAccount)
 );
 
+// Route to build account update view
+router.get(
+  "/update-account",
+  utilities.checkLogin,
+  utilities.handleErrors(accountController.buildUpdateAccount)
+);
+
 // Export routes
 module.exports = router;

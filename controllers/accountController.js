@@ -128,7 +128,7 @@ async function accountLogin(req, res) {
           maxAge: 3600 * 1000,
         });
       }
-      return res.redirect("/account");
+      return res.redirect("/account/");
     } else {
       req.flash(
         "message notice",
@@ -153,10 +153,12 @@ async function accountLogin(req, res) {
 async function buildAccount(req, res, next) {
   let nav = await utilities.getNav();
   let headerLink = await utilities.getHeaderLinks(req, res);
+  let accountContent = await utilities.getAccountContent(req, res);
   res.render("account/management", {
     title: "Account",
     nav,
     headerLink,
+    accountContent,
     errors: null,
   });
 }
@@ -175,6 +177,29 @@ async function accountLogout(req, res) {
   return res.redirect("/");
 }
 
+/* ***************************
+ *  Deliver Update Account view
+ * ************************** */
+async function buildUpdateAccount(req, res, next) {
+  const account_id = res.locals.accountData.account_id;
+  let nav = await utilities.getNav();
+  let headerLink = await utilities.getHeaderLinks(req, res);
+
+  const data = await accountModel.getAccountById(account_id);
+  const itemData = data[0];
+
+  res.render("account/update-account", {
+    title: "Update Account",
+    nav,
+    headerLink,
+    errors: null,
+    account_firstname: itemData.account_firstname,
+    account_lastname: itemData.account_lastname,
+    account_email: itemData.account_email,
+    account_password: itemData.account_password,
+  });
+}
+
 module.exports = {
   buildLogin,
   buildRegister,
@@ -182,4 +207,5 @@ module.exports = {
   accountLogin,
   buildAccount,
   accountLogout,
+  buildUpdateAccount,
 };
