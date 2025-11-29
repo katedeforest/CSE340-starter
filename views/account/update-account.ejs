@@ -14,12 +14,12 @@
 
 <div class="form-card updateAccount">
   <!-- content heading -->
-  <h2 class="form-card-title updateAccount-title"></h2>
+  <h2 class="form-card-title updateAccount-title">Account Information</h2>
 
   <!-- login HTML form that accepts an email adress and password-->
   <form
     id="updateAccount-form"
-    action="/account/update-account"
+    action="/account/update-account-info"
     method="post"
     class="form-card-form updateAccount-form"
   >
@@ -60,25 +60,34 @@
     <div class="form-card-button updateAccount-button">
       <button type="submit">UPDATE INFO</button>
     </div>
-  </form>
 
-  <!-- hidden input -->
-  <!-- prettier-ignore -->
-  <input type="hidden" name="account_id" <% if(locals.account_id) { %>
-  value="<%= locals.account_id %>" <% } %>>
+    <!-- hidden input -->
+    <!-- prettier-ignore -->
+    <input type="hidden" name="account_id" <% if(locals.account_id) { %>
+    value="<%= locals.account_id %>" <% } %>>
+    <!-- hidden input -->
+    <!-- prettier-ignore -->
+    <input type="hidden" name="current_email" value="<%= locals.account_email %>">
+  </form>
 </div>
 
 <div class="form-card changePassword">
   <!-- content heading -->
-  <h2 class="form-card-title changePassword-title"></h2>
+  <h2 class="form-card-title changePassword-title">Password</h2>
 
   <!-- login HTML form that accepts an email adress and password-->
   <form
     id="changePassword-form"
-    action="/account/update-account"
+    action="/account/update-account-pass"
     method="post"
     class="form-card-form changePassword-form"
   >
+    <div class="pass-reqs">
+      Entering a new password here will change your current password.
+      <br /><br />Passwords must be at least 12 characters and contain at least
+      1 number, 1 capital letter and 1 special character.
+    </div>
+    <br />
     <label for="account_password">Password: </label>
     <br />
     <input
@@ -89,10 +98,6 @@
       pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
       class="input"
     />
-    <div class="pass-reqs">
-      Passwords must be at least 12 characters and contain at least 1 number, 1
-      capital letter and 1 special character.
-    </div>
     <br />
     <!--  a button to submit the registration data -->
     <div class="form-card-button changePassword-button">

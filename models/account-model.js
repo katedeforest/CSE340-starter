@@ -53,7 +53,7 @@ async function getAccountByEmail(account_email) {
 }
 
 /* ***************************
- *  Get all inventory items and classification_name by classification_id
+ *  Return account data using account ID
  * ************************** */
 async function getAccountById(account_id) {
   try {
@@ -68,9 +68,47 @@ async function getAccountById(account_id) {
   }
 }
 
+/* *****************************
+ *   Update existing account information
+ * *************************** */
+async function updateAccountInfo(
+  account_firstname,
+  account_lastname,
+  account_email,
+  account_id
+) {
+  try {
+    const sql =
+      "UPDATE account SET account_firstname = $1, account_lastname = $2, account_email = $3 WHERE account_id = $4;";
+    return await pool.query(sql, [
+      account_firstname,
+      account_lastname,
+      account_email,
+      account_id,
+    ]);
+  } catch (error) {
+    return error.message;
+  }
+}
+
+/* *****************************
+ *   Update existing account password
+ * *************************** */
+async function updateAccountPass(account_password, account_id) {
+  try {
+    const sql =
+      "UPDATE account SET account_password = $1 WHERE account_id = $2;";
+    return await pool.query(sql, [account_password, account_id]);
+  } catch (error) {
+    return error.message;
+  }
+}
+
 module.exports = {
   registerAccount,
   checkExistingEmail,
   getAccountByEmail,
   getAccountById,
+  updateAccountInfo,
+  updateAccountPass,
 };
