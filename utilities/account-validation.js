@@ -240,16 +240,20 @@ validate.checkUpdatePassData = async (req, res, next) => {
   let errors = [];
   errors = validationResult(req);
   if (!errors.isEmpty()) {
+    const data = await accountModel.getAccountById(account_id);
+    const itemData = data[0];
+
     let nav = await utilities.getNav();
     let headerLink = await utilities.getHeaderLinks(req, res);
+
     res.render("account/account-update", {
       errors,
       title: "Registration",
       nav,
       headerLink,
-      account_firstname,
-      account_lastname,
-      account_email,
+      account_firstname: itemData.account_firstname,
+      account_lastname: itemData.account_lastname,
+      account_email: itemData.account_email,
     });
     return;
   }
