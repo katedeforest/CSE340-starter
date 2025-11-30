@@ -241,7 +241,7 @@ async function updateAccountInfo(req, res) {
 
     req.flash(
       "notice",
-      `Congratulations, your (${fieldsMessage}) has been updated, ${updatedData.account_firstname}.`
+      `Congratulations, your ${fieldsMessage} has been updated, ${updatedData.account_firstname}.`
     );
 
     // Get account content for management view

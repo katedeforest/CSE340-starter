@@ -190,17 +190,22 @@ validate.checkUpdateInfoData = async (req, res, next) => {
   const { account_firstname, account_lastname, account_email } = req.body;
   let errors = [];
   errors = validationResult(req);
+
   if (!errors.isEmpty()) {
+    const data = await accountModel.getAccountById(account_id);
+    const itemData = data[0];
+
     let nav = await utilities.getNav();
     let headerLink = await utilities.getHeaderLinks(req, res);
+
     res.render("account/update-account", {
       errors,
       title: "Update Account",
       nav,
       headerLink,
-      account_firstname,
-      account_lastname,
-      account_email,
+      account_firstname: itemData.account_firstname,
+      account_lastname: itemData.account_lastname,
+      account_email: itemData.account_email,
     });
     return;
   }
