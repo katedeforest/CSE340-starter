@@ -187,8 +187,7 @@ validate.updateInfoRules = () => {
  * Check data and return errors or continue to registration
  * ***************************** */
 validate.checkUpdateInfoData = async (req, res, next) => {
-  const { account_firstname, account_lastname, account_email, account_id } =
-    req.body;
+  const { account_id } = req.body;
   let errors = [];
   errors = validationResult(req);
 
@@ -237,8 +236,10 @@ validate.updatePassRules = () => {
  * Check data and return errors or continue to registration
  * ***************************** */
 validate.checkUpdatePassData = async (req, res, next) => {
+  const { account_id } = req.body;
   let errors = [];
   errors = validationResult(req);
+
   if (!errors.isEmpty()) {
     const data = await accountModel.getAccountById(account_id);
     const itemData = data[0];
@@ -248,7 +249,7 @@ validate.checkUpdatePassData = async (req, res, next) => {
 
     res.render("account/account-update", {
       errors,
-      title: "Registration",
+      title: "Account Update",
       nav,
       headerLink,
       account_firstname: itemData.account_firstname,
